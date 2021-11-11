@@ -1,5 +1,5 @@
 <template>
-  <div class="p-20" v-if="loaded">
+  <div class="p-5 lg:p-20" v-if="loaded">
       <h4 class="font-bold text-2xl uppercase text-green-400 py-5">Message</h4>
       <hr>
       <div v-html="this.purify(message.text)" class="p-3"></div>
