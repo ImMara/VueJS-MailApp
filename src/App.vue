@@ -5,16 +5,28 @@
     </nav>
     <Navbar>
       <ul class="sidebar-panel-nav">
-        <li class="py-5 text-2xl text-green-400">
+        <li class="py-5 text-2xl font-bold text-green-400">
           <router-link to="/">Home</router-link>
           <hr class="mt-2">
         </li>
         <li v-for="(message,index) in messages" :key="index">
-          <router-link :to="`/post/${message.id}`" v-on:click="closeNav">{{ message.title }}</router-link>
+          <router-link :to="`/post/${message.id}`" v-on:click="closeNav">
+
+            <div class="flex p-3 hover:bg-gray-800">
+              <div class="h-12 w-12">
+                <img :src="`${message.user.picture}`" class="rounded-full" alt="">
+              </div>
+              <div class="ml-3">
+                <h4 class="text-xl font-bold">{{ message.user.lastName+" - "+message.user.firstName }}</h4>
+                <p class="font-thin text-sm font-mono w-max">{{ message.summary }}</p>
+              </div>
+            </div>
+
+          </router-link>
         </li>
       </ul>
     </Navbar>
-    <div :class="{'w-full lg:w-1/2 ml-auto':isOpen,'w-full':!isOpen }">
+    <div :class="{'w-full lg:w-auto ml-524':isOpen,'w-full':!isOpen }">
       <router-view v-slot="{ Component, route }">
         <transition name="slide-fade" mode="out-in" appear>
           <component :is="Component" :key="route.path"/>
@@ -32,9 +44,13 @@ import Burger from '@/components/Menu/Burger.vue'
 import axios from "axios"
 
 declare interface Messages {
-  id: number,
-  title: string,
-  userId: number
+  id: string,
+  summary: string,
+  user: {
+    firstName: string,
+    lastName: string,
+    picture: string
+  }
 }
 
 export default defineComponent({
@@ -53,7 +69,7 @@ export default defineComponent({
   },
   mounted() {
     axios
-        .get('https://jsonplaceholder.typicode.com/todos/')
+        .get('https://svm-demo-api.herokuapp.com/api/messages')
         .then(r => {
           this.messages.push(...r.data)
         });

@@ -1,6 +1,6 @@
 <template>
   <div class="p-20">
-    <h1>{{ posts.title }}</h1>
+    <h1>{{ posts.summary }}</h1>
   </div>
 </template>
 
@@ -25,7 +25,7 @@ export default defineComponent({
   watch: {
     $route() {
       axios
-          .get('https://jsonplaceholder.typicode.com/posts/' + this.$route.params.id)
+          .get('https://svm-demo-api.herokuapp.com/api/messages/' + this.$route.params.id)
           .then(r => {
             this.posts = r.data
           })
@@ -33,7 +33,7 @@ export default defineComponent({
   },
   mounted() {
     axios
-        .get('https://jsonplaceholder.typicode.com/posts/' + this.$route.params.id)
+        .get('https://svm-demo-api.herokuapp.com/api/messages/' + this.$route.params.id)
         .then(r => {
           this.posts = r.data
         })
