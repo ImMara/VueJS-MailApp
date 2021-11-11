@@ -1,43 +1,72 @@
 <template>
-  <div class="p-20">
-    <h1>{{ posts.summary }}</h1>
-  </div>
+  <div class="p-20" v-if="loaded">
+      <h4 class="font-bold text-2xl uppercase text-green-400 py-5">Message</h4>
+      <hr>
+      <div v-html="this.purify(message.text)" class="p-3"></div>
+      <hr>
+      <div class="flex items-center py-5">
+        <img  class="rounded-full mr-2" :src="`${message.user.picture.thumbnail}`" alt="">
+        <div class="flex flex-col mb-1">
+          <small >{{ message.user.name.title+" "+message.user.name.last+" "+message.user.name.first }}</small><br>
+          <small>{{ message.user.email }}</small>
+        </div>
+      </div>
+    </div>
 </template>
 
 <script lang="ts">
 import {defineComponent} from 'vue';
 import axios from "axios"; // @ is an alias to /src
+import DOMPurify from "dompurify";
 
-declare interface Posts {
+declare interface Post {
   id: number,
-  title: string,
-  userId: number,
-  body: string
+  summary: string,
+  text: string,
+  user:{
+    email: string,
+    name:{
+      first: string,
+      last: string,
+      title: string,
+    }
+    picture:{
+      large: string,
+      medium: string,
+      thumbnail: string
+    }
+  },
+
 }
 
 export default defineComponent({
   name: 'Post',
   data() {
     return {
-      posts: {} as Posts
-    }
-  },
-  watch: {
-    $route() {
-      axios
-          .get('https://svm-demo-api.herokuapp.com/api/messages/' + this.$route.params.id)
-          .then(r => {
-            console.log(r.data)
-            this.posts = r.data
-          })
+      message: {} as Post,
+      loaded:false
     }
   },
   mounted() {
     axios
         .get('https://svm-demo-api.herokuapp.com/api/messages/' + this.$route.params.id)
         .then(r => {
-          this.posts = r.data
+          console.log(r.data)
+          this.message = r.data
+          this.loaded = true
         })
-  }
+  },
+  methods:{
+    purify:(text:string) => DOMPurify.sanitize(text,{USE_PROFILES: {html: true}})
+  },
+  watch: {
+    $route() {
+      axios
+          .get('https://svm-demo-api.herokuapp.com/api/messages/' + this.$route.params.id)
+          .then(r => {
+            this.message = r.data
+          })
+    }
+  },
 });
 </script>

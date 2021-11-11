@@ -67,7 +67,7 @@ export default defineComponent({
     }
   },
   methods: {
-    closeNav: store.mutations.setActive
+    closeNav: store.mutations.setActive,
   },
   mounted() {
     axios
