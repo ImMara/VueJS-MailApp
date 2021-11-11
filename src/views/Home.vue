@@ -26,14 +26,14 @@ export default defineComponent({
 }
 
 .home h1 {
-  @apply text-5xl font-bold text-green-400
+  @apply text-5xl text-center font-bold text-green-400
 }
 
 .home p {
-  @apply text-lg font-thin mt-5
+  @apply text-lg text-center font-thin mt-5
 }
 
 .list {
-  @apply text-lg font-thin flex flex-row mt-2
+  @apply text-lg font-thin p-1 flex flex-wrap justify-center mt-2
 }
 </style>
