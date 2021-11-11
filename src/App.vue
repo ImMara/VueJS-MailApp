@@ -4,18 +4,10 @@
       <Burger/>
     </nav>
     <Navbar>
-      <ul>
         <ul class="sidebar-panel-nav">
-        <li>
-          <a href="#home">Home</a>
-        </li>
-        <li>
-          <a href="#about">About</a>
-        </li>
-        <li>
-          <a href="#contact">Contact</a>
-        </li>
-      </ul>
+          <li v-for="(message,index) in messages" :key="index">
+            <router-link :to="`/post/${message.id}`">{{message.title}}</router-link>
+          </li>
       </ul>
     </Navbar>
     <div class="p-20" :class="{'w-1/2 ml-auto':isOpen,'w-full':!isOpen }">
@@ -29,6 +21,13 @@ import { defineComponent } from 'vue'
 import { store } from '@/store'
 import Navbar from './components/Menu/Navbar.vue'
 import Burger from '@/components/Menu/Burger.vue'
+import axios from "axios"
+
+declare interface Messages {
+  id:number,
+  title:string,
+  userId:number
+}
 
 export default defineComponent({
   components: {
@@ -37,8 +36,16 @@ export default defineComponent({
   },
   data () {
     return {
-      messages: [],
+      messages: [] as Messages[]
     }
+  },
+  mounted(){
+    axios
+      .get('https://jsonplaceholder.typicode.com/todos/')
+      .then(r =>{
+        console.log(r.data);
+        this.messages.push(...r.data)
+      })
   },
   computed:{
     isOpen(){
