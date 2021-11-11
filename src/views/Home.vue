@@ -34,6 +34,6 @@ export default defineComponent({
 }
 
 .list {
-  @apply text-lg font-thin flex mt-2
+  @apply text-lg font-thin flex flex-row mt-2
 }
 </style>
