@@ -1,40 +1,40 @@
 <template>
-<div id="app">
+  <div id="app">
     <nav class="main-nav">
       <Burger/>
     </nav>
     <Navbar>
-        <ul class="sidebar-panel-nav">
-          <li class="py-5 text-2xl text-green-400">
-            <router-link to="/">Home</router-link>
-            <hr class="mt-2">
-          </li>
-          <li v-for="(message,index) in messages" :key="index">
-            <router-link :to="`/post/${message.id}`" v-on:click="closeNav">{{message.title}}</router-link>
-          </li>
+      <ul class="sidebar-panel-nav">
+        <li class="py-5 text-2xl text-green-400">
+          <router-link to="/">Home</router-link>
+          <hr class="mt-2">
+        </li>
+        <li v-for="(message,index) in messages" :key="index">
+          <router-link :to="`/post/${message.id}`" v-on:click="closeNav">{{ message.title }}</router-link>
+        </li>
       </ul>
     </Navbar>
     <div :class="{'w-full lg:w-1/2 ml-auto':isOpen,'w-full':!isOpen }">
-        <router-view v-slot="{ Component, route }">
-          <transition name="slide-fade"  mode="out-in" appear>
-            <component :is="Component" :key="route.path" />
-          </transition>
-        </router-view>
+      <router-view v-slot="{ Component, route }">
+        <transition name="slide-fade" mode="out-in" appear>
+          <component :is="Component" :key="route.path"/>
+        </transition>
+      </router-view>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { store } from '@/store'
+import {defineComponent} from 'vue'
+import {store} from '@/store'
 import Navbar from './components/Menu/Navbar.vue'
 import Burger from '@/components/Menu/Burger.vue'
 import axios from "axios"
 
 declare interface Messages {
-  id:number,
-  title:string,
-  userId:number
+  id: number,
+  title: string,
+  userId: number
 }
 
 export default defineComponent({
@@ -42,29 +42,30 @@ export default defineComponent({
     Navbar,
     Burger
   },
-  data(){
+  data() {
     return {
       messages: [] as Messages[],
-      size:window.innerWidth
+      size: window.innerWidth
     }
   },
   methods: {
-    closeNav:store.mutations.setActive
+    closeNav: store.mutations.setActive
   },
-  mounted(){
+  mounted() {
     axios
-      .get('https://jsonplaceholder.typicode.com/todos/')
-      .then(r =>{
-        console.log(r.data);
-        this.messages.push(...r.data)
-      });
-    window.addEventListener('resize',()=>{
+        .get('https://jsonplaceholder.typicode.com/todos/')
+        .then(r => {
+          this.messages.push(...r.data)
+        });
+    window.addEventListener('resize', () => {
       this.size = window.innerWidth
     })
   },
-  computed:{
-    isOpen(){
-      if(this.size>1024){return store.mutations.setActive}
+  computed: {
+    isOpen() {
+      if (this.size > 1024) {
+        return store.mutations.setActive
+      }
       return store.state.active
     }
   }
@@ -85,14 +86,15 @@ body {
   border: 0;
   margin: 0;
   padding: 0;
- @apply bg-gray-100 min-h-screen;
+  @apply bg-gray-100 min-h-screen;
 }
 
 .main-nav {
   padding: 0.5rem 0.8rem;
   @apply flex justify-end fixed z-50 w-full lg:hidden;
 }
-.sidebar-panel-nav{
+
+.sidebar-panel-nav {
   @apply text-white;
 }
 

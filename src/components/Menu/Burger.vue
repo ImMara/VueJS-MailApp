@@ -1,39 +1,39 @@
 <template>
-    <div id="burger" :class="{'active':isActive}" @click.prevent="toggleSidenav">
-        <slot>
-            <button type="button" class="burger-button" title="Menu">
-                <span class="hidden-bar">toggle menu</span>
-                <span class="burger-bar burger-bar--1"></span>
-                <span class="burger-bar burger-bar--2"></span>
-                <span class="burger-bar burger-bar--3"></span>
-            </button>
-        </slot>
-    </div>
+  <div id="burger" :class="{'active':isActive}" @click.prevent="toggleSidenav">
+    <slot>
+      <button type="button" class="burger-button" title="Menu">
+        <span class="hidden-bar">toggle menu</span>
+        <span class="burger-bar burger-bar--1"></span>
+        <span class="burger-bar burger-bar--2"></span>
+        <span class="burger-bar burger-bar--3"></span>
+      </button>
+    </slot>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import {store}  from '@/store'
+import {defineComponent} from 'vue'
+import {store} from '@/store'
 
 export default defineComponent({
-   name: 'Navbar',
-   computed:{
-         isActive(){
-              return store.state.active
-         }
-    },
-    methods:{
-        toggleSidenav(){
-            store.mutations.setActive()
-        }
+  name: 'Navbar',
+  computed: {
+    isActive() {
+      return store.state.active
     }
+  },
+  methods: {
+    toggleSidenav() {
+      store.mutations.setActive()
+    }
+  }
 })
 </script>
 
 <style scoped>
-    .hidden-bar{
-        visibility: hidden;
-    }
+.hidden-bar {
+  visibility: hidden;
+}
 
 button {
   cursor: pointer;
@@ -67,8 +67,8 @@ button:focus {
   width: auto;
   margin-top: -1px;
   transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
-    opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
-    background-color 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  opacity 0.3s cubic-bezier(0.165, 0.84, 0.44, 1),
+  background-color 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .burger-bar--1 {

@@ -5,40 +5,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import {defineComponent} from 'vue';
 import axios from "axios"; // @ is an alias to /src
 
 declare interface Posts {
-  id:number,
-  title:string,
-  userId:number,
-  body:string
+  id: number,
+  title: string,
+  userId: number,
+  body: string
 }
 
 export default defineComponent({
   name: 'Post',
   data() {
     return {
-      posts:{} as Posts
+      posts: {} as Posts
     }
   },
   watch: {
-    $route (){
+    $route() {
       axios
-          .get('https://jsonplaceholder.typicode.com/posts/'+this.$route.params.id)
-          .then(r =>{
-            console.log(r.data)
+          .get('https://jsonplaceholder.typicode.com/posts/' + this.$route.params.id)
+          .then(r => {
             this.posts = r.data
           })
     }
   },
-  mounted(){
+  mounted() {
     axios
-      .get('https://jsonplaceholder.typicode.com/posts/'+this.$route.params.id)
-      .then(r =>{
-        console.log(r.data)
-        this.posts = r.data
-      })
+        .get('https://jsonplaceholder.typicode.com/posts/' + this.$route.params.id)
+        .then(r => {
+          this.posts = r.data
+        })
   }
 });
 </script>
