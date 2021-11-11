@@ -26,7 +26,7 @@
         </li>
       </ul>
     </Navbar>
-    <div :class="{'w-full lg:w-auto ml-524':isOpen,'w-full':!isOpen }">
+    <div :class="{'w-full lg:w-auto lg:ml-524':isOpen,'w-full':!isOpen }">
       <router-view v-slot="{ Component, route }">
         <transition name="slide-fade" mode="out-in" appear>
           <component :is="Component" :key="route.path"/>

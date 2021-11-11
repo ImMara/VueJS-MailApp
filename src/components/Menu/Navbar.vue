@@ -53,12 +53,12 @@ export default defineComponent({
 }
 
 .sidebar-backdrop {
-  @apply w-screen fixed top-0 left-0 cursor-pointer h-screen;
+  @apply w-screen fixed top-0 left-0 cursor-pointer min-h-screen;
 }
 
 .sidebar-panel {
   padding: 3rem 20px 2rem 20px;
-  @apply fixed left-0 h-screen w-full lg:w-max top-0 bg-gray-900 z-40 overflow-y-auto;
+  @apply fixed left-0 min-h-screen w-full lg:w-max top-0 bg-gray-900 z-40 overflow-y-auto;
 }
 </style>
 
