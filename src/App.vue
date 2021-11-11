@@ -13,8 +13,8 @@
           <router-link :to="`/post/${message.id}`" v-on:click="closeNav">
 
             <div class="flex p-3 hover:bg-gray-800">
-              <div class="h-12 w-12">
-                <img :src="`${message.user.picture}`" class="rounded-full" alt="">
+              <div>
+                <img :src="`${message.user.picture}`" class="object-cover rounded-full" alt="">
               </div>
               <div class="ml-3">
                 <h4 class="text-xl font-bold">{{ message.user.lastName+" - "+message.user.firstName }}</h4>
