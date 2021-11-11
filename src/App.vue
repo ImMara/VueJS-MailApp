@@ -5,7 +5,7 @@
     </nav>
     <Navbar>
       <ul class="sidebar-panel-nav">
-        <li class="py-5 text-2xl font-bold text-green-400">
+        <li class="py-5 text-2xl uppercase font-bold text-green-400">
           <router-link to="/">Home</router-link>
           <hr class="mt-2">
         </li>
@@ -17,8 +17,8 @@
                 <img :src="`${message.user.picture}`" class="object-cover rounded-full" alt="">
               </div>
               <div class="ml-3">
-                <h4 class="text-xl font-bold">{{ message.user.lastName+" - "+message.user.firstName }}</h4>
-                <p class="font-thin text-sm font-mono w-max">{{ message.summary }}</p>
+                <h4 class="text-lg font-bold">{{ message.user.lastName+" - "+message.user.firstName }}</h4>
+                <p class="font-thin text-xs font-mono w-max">{{ message.summary }}</p>
               </div>
             </div>
 
