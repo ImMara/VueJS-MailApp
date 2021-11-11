@@ -7,7 +7,7 @@
       <div class="flex items-center py-5">
         <img  class="rounded-full mr-2" :src="`${message.user.picture.thumbnail}`" alt="">
         <div class="flex flex-col justify-center mb-1">
-          <small >{{ message.user.name.title+" "+message.user.name.last+" "+message.user.name.first }}</small><br>
+          <small >{{ message.user.name.title+" "+message.user.name.last+" "+message.user.name.first }}</small>
           <small>{{ message.user.email }}</small>
         </div>
       </div>
