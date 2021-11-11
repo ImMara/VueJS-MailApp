@@ -6,7 +6,7 @@
     <Navbar>
       <ul class="sidebar-panel-nav">
         <li class="py-5 text-2xl uppercase font-bold text-green-400">
-          <router-link to="/">Home</router-link>
+          <router-link to="/" v-on:click="closeNav">Home</router-link>
           <hr class="mt-2">
         </li>
         <li v-for="(message,index) in messages" :key="index">
