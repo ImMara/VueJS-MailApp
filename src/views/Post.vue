@@ -27,6 +27,7 @@ export default defineComponent({
       axios
           .get('https://svm-demo-api.herokuapp.com/api/messages/' + this.$route.params.id)
           .then(r => {
+            console.log(r.data)
             this.posts = r.data
           })
     }

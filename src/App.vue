@@ -10,7 +10,9 @@
           <hr class="mt-2">
         </li>
         <li v-for="(message,index) in messages" :key="index">
-          <router-link :to="`/post/${message.id}`" v-on:click="closeNav">
+          <router-link
+              :to="`/post/${message.id}`"
+              v-on:click="closeNav">
 
             <div class="flex p-3 hover:bg-gray-800">
               <div>
@@ -112,6 +114,10 @@ body {
 
 .sidebar-panel-nav {
   @apply text-white;
+}
+
+.router-link-active > div{
+  @apply bg-gray-800;
 }
 
 .slide-fade-enter-active {
