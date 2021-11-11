@@ -18,7 +18,7 @@
               </div>
               <div class="ml-3">
                 <h4 class="text-lg font-bold">{{ message.user.lastName+" - "+message.user.firstName }}</h4>
-                <p class="font-thin text-xs font-mono w-max">{{ message.summary }}</p>
+                <p class="font-thin text-xs font-mono lg:w-max">{{ message.summary }}</p>
               </div>
             </div>
 
