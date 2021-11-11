@@ -3,9 +3,9 @@
     <slot>
       <button type="button" class="burger-button" title="Menu">
         <span class="hidden-bar">toggle menu</span>
-        <span class="burger-bar burger-bar--1"></span>
-        <span class="burger-bar burger-bar--2"></span>
-        <span class="burger-bar burger-bar--3"></span>
+        <span class="burger-bar bg-gray-800 dark:bg-gray-100  burger-bar--1"></span>
+        <span class="burger-bar bg-gray-800 dark:bg-gray-100 burger-bar--2"></span>
+        <span class="burger-bar bg-gray-800 dark:bg-gray-100 burger-bar--3"></span>
       </button>
     </slot>
   </div>
@@ -58,7 +58,6 @@ button:focus {
 }
 
 .burger-bar {
-  background-color: #130f40;
   position: absolute;
   top: 50%;
   right: 6px;
