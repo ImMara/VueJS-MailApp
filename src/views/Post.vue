@@ -1,5 +1,7 @@
 <template>
-  <h1>{{ posts.title }}</h1>
+  <div class="p-20">
+    <h1>{{ posts.title }}</h1>
+  </div>
 </template>
 
 <script lang="ts">

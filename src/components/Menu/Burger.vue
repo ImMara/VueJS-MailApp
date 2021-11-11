@@ -97,9 +97,9 @@ button:focus {
   transform: rotate(-180deg);
 }
 
-/* #burger.active .burger-bar {
-  background-color: #fff;
-} */
+#burger.active .burger-bar {
+  @apply bg-white lg:bg-gray-900 ;
+}
 
 #burger.active .burger-bar--1 {
   transform: rotate(45deg);

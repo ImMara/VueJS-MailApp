@@ -5,12 +5,16 @@
     </nav>
     <Navbar>
         <ul class="sidebar-panel-nav">
+          <li class="py-5 text-2xl text-green-400">
+            <router-link to="/">Home</router-link>
+            <hr class="mt-2">
+          </li>
           <li v-for="(message,index) in messages" :key="index">
-            <router-link :to="`/post/${message.id}`">{{message.title}}</router-link>
+            <router-link :to="`/post/${message.id}`" v-on:click="closeNav">{{message.title}}</router-link>
           </li>
       </ul>
     </Navbar>
-    <div class="p-20" :class="{'w-1/2 ml-auto':isOpen,'w-full':!isOpen }">
+    <div :class="{'w-full lg:w-1/2 ml-auto':isOpen,'w-full':!isOpen }">
         <router-view v-slot="{ Component, route }">
           <transition name="slide-fade"  mode="out-in" appear>
             <component :is="Component" :key="route.path" />
@@ -38,10 +42,14 @@ export default defineComponent({
     Navbar,
     Burger
   },
-  data () {
+  data(){
     return {
-      messages: [] as Messages[]
+      messages: [] as Messages[],
+      size:window.innerWidth
     }
+  },
+  methods: {
+    closeNav:store.mutations.setActive
   },
   mounted(){
     axios
@@ -49,10 +57,14 @@ export default defineComponent({
       .then(r =>{
         console.log(r.data);
         this.messages.push(...r.data)
-      })
+      });
+    window.addEventListener('resize',()=>{
+      this.size = window.innerWidth
+    })
   },
   computed:{
     isOpen(){
+      if(this.size>1024){return store.mutations.setActive}
       return store.state.active
     }
   }
@@ -65,33 +77,23 @@ export default defineComponent({
 @tailwind utilities;
 
 html {
-  height: 100%;
-  overflow: hidden;
+  @apply min-h-screen;
+  overflow-x: hidden;
 }
 
 body {
   border: 0;
   margin: 0;
   padding: 0;
-  height: 100%;
- @apply bg-gray-100;
+ @apply bg-gray-100 min-h-screen;
 }
 
 .main-nav {
   padding: 0.5rem 0.8rem;
-  @apply flex justify-end;
+  @apply flex justify-end fixed z-50 w-full lg:hidden;
 }
-
-ul.sidebar-panel-nav {
-  list-style-type: none;
-}
-
-ul.sidebar-panel-nav > li > a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.5rem;
-  display: block;
-  padding-bottom: 0.5em;
+.sidebar-panel-nav{
+  @apply text-white;
 }
 
 .slide-fade-enter-active {
@@ -99,7 +101,7 @@ ul.sidebar-panel-nav > li > a {
 }
 
 .slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter-from,

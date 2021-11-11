@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar">
-        <div class="sidebar-backdrop" @click="closeNav" v-if="isOpen"></div>
+<!--        <div class="sidebar-backdrop" @click="closeNav" v-if="isOpen"></div>-->
         <transition name="slide">
             <div v-if="isOpen"
                  class="sidebar-panel">
@@ -16,11 +16,26 @@ import { defineComponent } from 'vue'
 import { store } from '@/store'
 
 export default defineComponent({
+    name:"Navbar",
+    data() {
+      return {
+        size:window.innerWidth
+      }
+    },
     methods:{
         closeNav : store.mutations.setActive
+        },
+    mounted(){
+      window.addEventListener('resize',()=>{
+        this.size = window.innerWidth
+      })
+
     },
     computed:{
         isOpen() {
+            if(this.size>=1024){
+              return store.mutations.setActive
+            }
             return store.state.active
         }
     }
@@ -42,7 +57,7 @@ export default defineComponent({
     }
     .sidebar-panel{
         padding:3rem 20px 2rem 20px;
-        @apply fixed left-0 h-screen w-1/2 top-0 bg-gray-900 z-50 overflow-y-auto;
+        @apply fixed left-0 h-screen w-full lg:w-1/2 top-0 bg-gray-900 z-40 overflow-y-auto;
     }
 </style>
 
