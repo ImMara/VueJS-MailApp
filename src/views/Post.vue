@@ -54,14 +54,9 @@ export default defineComponent({
   created() {
     this.fetch();
   },
-  // watch: {
-  //   '$route': 'fetch'
-  // },
   methods: {
     purify: (text: string) => DOMPurify.sanitize(text, {USE_PROFILES: {html: true}}),
     fetch() {
-      const id = this.$route.params.id
-      if(this.$route.params.id !== id) return
       axios
           .get('https://svm-demo-api.herokuapp.com/api/messages/' + this.$route.params.id)
           .then(r => {

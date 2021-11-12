@@ -74,14 +74,6 @@ export default defineComponent({
     window.addEventListener('resize', () => {
       this.size = window.innerWidth
     })
-  },
-  computed: {
-    isOpen() {
-      if (this.size > 1024) {
-        return store.mutations.setActive
-      }
-      return store.state.active
-    }
   }
 })
 </script>
