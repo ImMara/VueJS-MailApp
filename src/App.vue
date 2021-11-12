@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="lg:flex dark:bg-gray-800">
     <nav class="main-nav">
       <Burger/>
     </nav>
@@ -28,7 +28,7 @@
         </li>
       </ul>
     </Navbar>
-    <div :class="{'w-full lg:w-auto lg:ml-524':isOpen,'w-full':!isOpen }" class="dark:bg-gray-800 min-h-screen dark:text-white">
+    <div class="min-h-screen w-full dark:text-white">
       <router-view v-slot="{ Component, route }">
         <transition name="slide-fade" mode="out-in" appear>
           <component :is="Component" :key="route.path"/>
