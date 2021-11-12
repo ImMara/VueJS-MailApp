@@ -2,7 +2,6 @@
 
 # Clone 
 ```
-
 git clone https://github.com/ImMara/vue-messages-app.git
 cd vue-messages-app
 ```
