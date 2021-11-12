@@ -13,17 +13,11 @@
           <router-link
               :to="`/post/${message.id}`"
               v-on:click="closeNav">
-
-            <div class="flex p-3 hover:bg-gray-800">
-              <div>
-                <img :src="`${message.user.picture}`" class="object-cover rounded-full" alt="">
-              </div>
-              <div class="ml-3">
-                <h4 class="text-lg font-bold">{{ message.user.lastName+" - "+message.user.firstName }}</h4>
-                <p class="font-thin text-xs font-mono lg:w-max">{{ message.summary }}</p>
-              </div>
-            </div>
-
+            <UserMedium
+                :short="message.summary"
+                :picture="message.user.picture"
+                :lastName="message.user.lastName"
+                :firstName="message.user.firstName"/>
           </router-link>
         </li>
       </ul>
@@ -43,6 +37,7 @@ import {defineComponent} from 'vue'
 import {store} from '@/store'
 import Navbar from './components/Menu/Navbar.vue'
 import Burger from '@/components/Menu/Burger.vue'
+import UserMedium from '@/components/UserMedium.vue'
 import axios from "axios"
 
 declare interface Messages {
@@ -58,7 +53,8 @@ declare interface Messages {
 export default defineComponent({
   components: {
     Navbar,
-    Burger
+    Burger,
+    UserMedium
   },
   data() {
     return {
@@ -116,7 +112,7 @@ body {
   @apply text-white;
 }
 
-.router-link-active > div{
+.router-link-active > div {
   @apply bg-gray-800;
 }
 

@@ -1,36 +1,37 @@
 <template>
   <div class="p-5 lg:p-20 container mx-auto" v-if="loaded">
-      <h4 class="font-bold text-2xl uppercase text-green-400 py-5">Message</h4>
-      <hr>
-      <div v-html="this.purify(message.text)" class="p-3"></div>
-      <hr>
-      <div class="flex items-center py-5">
-        <img  class="rounded-full mr-2" :src="`${message.user.picture.thumbnail}`" alt="">
-        <div class="flex flex-col justify-center mb-1">
-          <small >{{ message.user.name.title+" "+message.user.name.last+" "+message.user.name.first }}</small>
-          <small>{{ message.user.email }}</small>
-        </div>
-      </div>
-    </div>
+    <h4 class="font-bold text-2xl uppercase text-green-400 py-5">Message</h4>
+    <hr>
+    <div v-html="this.purify(message.text)" class="p-3"></div>
+    <hr>
+    <UserSmall
+        :def="message.user.name.title"
+        :email="message.user.email"
+        :firstName="message.user.name.first"
+        :lastName="message.user.name.last"
+        :picture="message.user.picture.thumbnail"
+    />
+  </div>
 </template>
 
 <script lang="ts">
 import {defineComponent} from 'vue';
-import axios from "axios"; // @ is an alias to /src
+import axios from "axios";
+import UserSmall from '@/components/UserSmall.vue';
 import DOMPurify from "dompurify";
 
 declare interface Post {
   id: number,
   summary: string,
   text: string,
-  user:{
+  user: {
     email: string,
-    name:{
+    name: {
       first: string,
       last: string,
       title: string,
     }
-    picture:{
+    picture: {
       large: string,
       medium: string,
       thumbnail: string
@@ -41,10 +42,13 @@ declare interface Post {
 
 export default defineComponent({
   name: 'Post',
+  components: {
+    UserSmall
+  },
   data() {
     return {
       message: {} as Post,
-      loaded:false
+      loaded: false
     }
   },
   mounted() {
@@ -56,8 +60,8 @@ export default defineComponent({
           this.loaded = true
         })
   },
-  methods:{
-    purify:(text:string) => DOMPurify.sanitize(text,{USE_PROFILES: {html: true}})
+  methods: {
+    purify: (text: string) => DOMPurify.sanitize(text, {USE_PROFILES: {html: true}})
   },
   watch: {
     $route() {
