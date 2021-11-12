@@ -54,9 +54,9 @@ export default defineComponent({
   created() {
     this.fetch();
   },
-  watch: {
-    '$route': 'fetch'
-  },
+  // watch: {
+  //   '$route': 'fetch'
+  // },
   methods: {
     purify: (text: string) => DOMPurify.sanitize(text, {USE_PROFILES: {html: true}}),
     fetch() {
@@ -65,6 +65,7 @@ export default defineComponent({
       axios
           .get('https://svm-demo-api.herokuapp.com/api/messages/' + this.$route.params.id)
           .then(r => {
+            console.log(r.data)
             this.message = r.data
             this.loaded=true
           })
