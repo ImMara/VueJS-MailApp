@@ -3,7 +3,7 @@
     <nav class="main-nav">
       <Burger/>
     </nav>
-    <Navbar>
+    <Navbar v-if="loaded">
       <ul class="sidebar-panel-nav">
         <li class="py-5 text-2xl uppercase font-bold text-green-400">
           <router-link to="/" v-on:click="closeNav">Home</router-link>
@@ -22,7 +22,7 @@
         </li>
       </ul>
     </Navbar>
-    <div class="min-h-screen w-full dark:text-white">
+    <div class="min-h-screen pt-5 w-full dark:text-white">
       <router-view v-slot="{ Component, route }">
         <transition name="slide-fade" mode="out-in" appear>
           <component :is="Component" :key="route.path"/>
@@ -59,7 +59,8 @@ export default defineComponent({
   data() {
     return {
       messages: [] as Messages[],
-      size: window.innerWidth
+      size: window.innerWidth,
+      loaded:false,
     }
   },
   methods: {
@@ -70,6 +71,7 @@ export default defineComponent({
         .get('https://svm-demo-api.herokuapp.com/api/messages')
         .then(r => {
           this.messages.push(...r.data)
+          this.loaded = true
         });
     window.addEventListener('resize', () => {
       this.size = window.innerWidth

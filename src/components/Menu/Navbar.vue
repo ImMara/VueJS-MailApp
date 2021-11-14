@@ -58,7 +58,7 @@ export default defineComponent({
 
 .sidebar-panel {
   padding: 3rem 20px 2rem 20px;
-  @apply fixed lg:relative left-0 h-screen w-full lg:w-max top-0 bg-gray-900 z-40 overflow-y-auto;
+  @apply fixed lg:sticky left-0 h-screen w-full lg:w-max top-0 bg-gray-900 z-40 overflow-y-auto;
 }
 </style>
 
