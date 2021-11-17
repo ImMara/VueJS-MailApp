@@ -25,13 +25,11 @@
         />
         <UserNav>
           <li class="hover:text-green-700"><router-link to="/">Home</router-link></li>
-          <li class="hover:text-green-700">New Message</li>
+          <li class="hover:text-green-700"><router-link to="/new">New Message</router-link></li>
         </UserNav>
       </div>
 
     </div>
-
-
 
   </div>
 </template>

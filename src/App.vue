@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="lg:flex dark:bg-gray-800">
-    <nav class="main-nav">
+    <nav  class="main-nav">
       <Burger/>
     </nav>
     <Navbar v-if="loaded">
@@ -65,6 +65,9 @@ export default defineComponent({
   },
   methods: {
     closeNav: store.mutations.setActive,
+    submit: function (value:never) {
+      console.log(value)
+    }
   },
   mounted() {
     axios
